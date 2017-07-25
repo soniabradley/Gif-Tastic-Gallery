@@ -8,11 +8,11 @@ var buttonFactory = function() {
 	$(".buttonGallery").empty();
 
 	for (i = 0; i < topics.lenght; i++) {
-		var imAbutton = $('<button>');
-		imAbutton.addClass("yes");
-		imAbutton.attr("data-name", topics[i]);
-		imAbutton.text(topics[i]);
-		$(".buttonGallery").append(imAbutton);
+		var personImage = $('<button>');
+		personImage.addClass("buttons");
+		personImage.attr("data-name", topics[i]);
+		personImage.text(topics[i]);
+		$(".buttonGallery").append(personImage);
 
 	}};
 
@@ -22,13 +22,13 @@ var buttonFactory = function() {
 		event.preventDefault();
 		// this line takes the input from the textbox
 		var onemorebutton = $("#user-input").val().trim();
-		// adding movie from the textbook to array
+		// adding gif from the textbook to array
 		topics.push(onemorebutton);
-		// calling renderButtons which handle the processing of movie array
+		// calling renderButtons which handle the processing of gif array
 		buttonFactory();
 	});
 
-	$(".yes").on("click", function(){
+	$(".buttons").on("click", function(){
 		// $("#gif-Gallery").empty();
 		// var searchTermUpdate;
 		var searchTerm = $(this).attr("data-name");
@@ -49,6 +49,8 @@ var buttonFactory = function() {
           // Looping over every result item
         for (var i = 0; i < results.length; i++) {
 // end of class notes
+
+
 			// gifcount = gifLocation;
 		   // Only taking action if the photo has an appropriate rating
           if (results[i].rating !== "r" && results[i].rating !== "pg-13") {
