@@ -5,11 +5,8 @@
   <meta charset="utf-8">
   <title>GifTastic</title>
   <link rel="stylesheet" type="text/css" href="giphy.css">
-  <script type="text/javascript" src="giphy.js"></script>
-  <script
-  src="https://code.jquery.com/jquery-3.2.1.min.js"
-  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-  crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 
 </head>
 
@@ -18,21 +15,24 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
+        
+        <div id="buttonsArea"></div>
         <div class="buttonGallery"></div>
         <h4>Search for more Giphs:</h4>
-        <form id="btnGeneratingForm">
-          <label for="input">Enter your search here: </label>
-          <input type="text" id="user-input">
+
+        <form id="search-form">
+          <label for="search-input">Enter your search here: </label>
+          <input type="text" id="search-input">
           <br>
-          <input type="submit" id="anotherButton" value="More buttons">
+          <input type="submit" id="anotherButton" value="Submit">
         </form>
       </div>
     </div>
   </div>
   <div class="row">
-    <div id="gif-Gallery"></div>
+    <div id="searches"></div>
   </div>
-
+<script src="giphy.js" type="text/javascript"></script>
 </body>
 
 </html>

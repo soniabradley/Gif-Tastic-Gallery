@@ -1,77 +1,70 @@
-// alert("connect");
-var topics = ['dogs', 'cats', 'birds']
-var gifcount = 0
-var buttonFactory = 0
-// var gifLocation;
-var clickCount = 0
 
-var buttonFactory = function () {
-	$('.buttonGallery').empty()
+$(function(){
+	populateButtons(searchArray,'searchButton','#buttonsArea')
+	console.log("hi");
+})
 
-	for (i = 0; i < topics.lenght; i++) {
-		var personImage = $('<button>');
-		personImage.addClass("buttons");
-		personImage.attr("data-name", topics[i]);
-		personImage.text(topics[i]);
-		$(".buttonGallery").append(personImage);
+var searchArray = ['cats','dogs','birds'];
 
-	}};
+function populateButtons(searchArray,classToAdd,areaToAdd){
+// need to empty area or else will create copies
+	$(areaToAdd).empty();
+	for (var i=0; i < searchArray.lenght; i++) {
+// modify button element
+		var a = $('<button>');
+		a.addClass(classToAdd);
+		a.attr('data-type', searchArray[i]);
+		// text of our button is going to be dog, cat, bird
+		a.text("searchArray[i]");
+		$(areaToAddTo).append(a);
 
-	buttonFactory();
+	}
+}
 
-	$('#anotherButton').on('click', function (event) {
-		event.preventDefault()
-		// this line takes the input from the textbox
-		var onemorebutton = $('#user-input').val().trim()
-		// adding gif from the textbook to array
-		topics.push(onemorebutton)
-		buttonFactory()
-	});
+$(document).on('click','.searchButton',function(){
+	$('#searches').empty();
+	var type = $(this).data('type');
+	// enter api key
+	var queryURL = 'http://api.giphy.com/v1/gifs/search?q='+type+'&api_key=8d40e358880641d8b15efdadfafdf16e&limit=10';
+	// make api call
+	$.ajax({
+		url:queryURL,method:'GET'})
+	.done(function(response){
+		// console.log(response);
+		// exactly like our 6.3 exercise
+		for(var i=0;i<response.data.length; i++){
+			var searchDiv = $('<div class="search-item">');
+			var rating = response.date[i].rating;
+			var p = $('<p>').text('Rating: '+rating);
+			var animated = response.data[i].images.fixed_height.url;
+			var still = response.data[i].images.fixed_height_still.url;
+			var image = $('<img>');
+			image.attr('src',still);
+			image.attr('data-still',still);
+			image.attr('data-animated',animated);
+			image.attr('data-state','still');
+			image.addClass("searchImage");
+			searchDiv.append(p);
+			searchDiv.append(image);
+			$('#searches').append(searchDiv);
+		}
+	})
+})
 
-	$('.buttons').on('click', function () {
-		// $("#gif-Gallery").empty();
-		// var searchTermUpdate;
-		var searchTerm = $(this).attr('data-name')
-		// // removing white space between two-word strings, replacing with "+"
-		// searchTermUpdate = searchTerm.replace(/ +/g, "+");
-// from class exercise notes
-		var queryURL = 'http://api.giphy.com/v1/gifs/search?q=' +
-        person + '&api_key=dc6zaTOxFJmzC&limit=10'
-      // Performing our AJAX GET request
-      $.ajax({
-          url: queryURL,
-          method: 'GET'
-        })
-        // After the data comes back from the API
-        .done(function (response) {
-          // Storing an array of results in the results variable
-        var results = response.data
-          // Looping over every result item
-        for (var i = 0; i < results.length; i++) {
-// end of class notes
+$(document).on('click','.searchImage',function(){
+	var state= $(this).attr('data-state');
+	if(state =="still"){
+		$(this).attr('scr',$(this).data('animated'));
+		$(this).attr('data-state','animated');
+	} else {
+			$(this).attr('src',$(this).data('still'));
+			$(this).attr('data-state','still');
+	}
+})
 
-
-			// gifcount = gifLocation;
-		   // Only taking action if the photo has an appropriate rating
-          if (results[i].rating !== 'r' && results[i].rating !== 'pg-13') {
-           // Creating a div with the class "item"
-        	var gifDiv = $("<div class='item'>")
-              // Storing the result item's rating
-        	var rating = results[i].rating
-              // Creating a paragraph tag with the result item's rating
-        	var p = $("<p>").text("Rating: " + rating);
-              // Creating an image tag
-        	var personImage = $("<img>");
-              // Giving the image tag an src attribute of a proprty pulled off the
-              // result item
-        	personImage.attr("src", results[i].images.fixed_height.url);
-              // Appending the paragraph and personImage we created to the "gifDiv" div we created
-        	gifDiv.append(p);
-        	gifcountifDiv.append(personImage);
-              // Prepending the gifDiv to the "#gifs-appear-here" div in the HTML
-        	$("#gifs-appear-here").prepend(gifDiv);
-
-            }
-          }
-        });
-    });
+$('#addSearch').on('click',function(){
+	 var newSearch = $('input').eq(0).val();
+	 searchArray.push(newSearch);
+	 populateButtons(searchArray,'searchButton','#buttonsArea');
+	 return false;
+})
