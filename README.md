@@ -13,5 +13,5 @@ Production key is in .gitigonore file
 Gif-Tastic Gallery
 Source Code
 * [jQuery](https://developers.giphy.com/")
-jQuery
+
 
