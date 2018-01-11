@@ -18,7 +18,7 @@ Internet is required.
 
 
 # To Do (future work)
-[] popualate with new searches
+[] populate with new searches
 
 # Author
 Sonia Molina Bradley
