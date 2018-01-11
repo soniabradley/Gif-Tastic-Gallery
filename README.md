@@ -1,26 +1,26 @@
 # Gif-Tastic Gallery
 
-Gif-Tastic Gallery searches the [Giphy API](https://developers.giphy.com/) based on key words selected by the user. Ten results are displayed for each search. Users may click on images to play/pause the gifs.
+Gif-Tastic Gallery creates a dynamic web page that populates with gifs by searching the [Giphy API](https://developers.giphy.com/) based on key words selected by the user. Users may click on images to play/pause the gifs. Each search is limited to 10 gifs and each search is prepended.
 
 See [Gif-Tastic Gallery](https://soniabradley.github.io/Gif-Tastic-Gallery/) on Github Pages for a live demo.
 
 # Getting Started
+Internet is required.
 
-
-
-
-#Links
-* [Gif-Tastic Gallery](https://soniabradley.github.io/Gif-Tastic-Gallery/)
+# Links
 * [Giphy API](https://developers.giphy.com/)
+* [jQuery](http://jquery.com/) 
 * [Source Code](https://github.com/soniabradley/Gif-Tastic-Gallery)
-* [jQuery](https://developers.giphy.com/") 
+
+#  Built With
+* [jQuery.ajax()](api.jquery.com/jquery.ajax/)
+* [GET method](http://api.jquery.com/get/)
 
 
-# Access and API Keys
-https://giphy.api-docs.io/1.0/welcome/access-and-api-keys
-The public beta key is "dc6zaTOxFJmzC”
-http://api.giphy.com/v1/gifs/search?q=funny+cat&api_key=dc6zaTOxFJmzC
-q = search query term or phrase
-& = in addition
-The Giphy API implements a REST-like interface.  Connections can be made with any HTTPS enabled programming language.
-Production key is in .gitigonore file
+# To Do (still needs work)
+[] popualate with new searches
+
+# Author
+Sonia Molina Bradley
+
+

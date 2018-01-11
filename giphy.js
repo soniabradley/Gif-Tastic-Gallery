@@ -1,40 +1,41 @@
-
-$(function(){
-	populateButtons(searchArray,'searchButton','#buttonsArea')
+$(function () {
+	populateButtons(searchArray, 'searchButton', '#buttonsArea')
 	console.log("hi");
 })
 
-var searchArray = ['cats','dogs','birds'];
+var searchArray = ['Cat', 'Dog', 'Bird'];
 
-function populateButtons(searchArray,classToAdd,areaToAdd){
-// need to empty area or else will create copies
-	$(areaToAdd).empty();
-	for (var i=0; i < searchArray.lenght; i++) {
-// modify button element
+function populateButtons(searchArray, classToAdd, areaToAddTo) {
+	// need to empty area or else will create copies
+	$(areaToAddTo).empty();
+	// for loop 
+	for (var i = 0; i < searchArray.length; i++) {
+		// var a  = modify button element
 		var a = $('<button>');
 		a.addClass(classToAdd);
 		a.attr('data-type', searchArray[i]);
 		// text of our button is going to be dog, cat, bird
-		a.text("searchArray[i]");
+		a.text(searchArray[i]);
 		$(areaToAddTo).append(a);
 
 	}
 }
 
-$(document).on('click','.searchButton',function(){
-	$('#searches').empty();
+$(document).on('click', '.searchButton', function () {
+	// $('#searches').empty();
 	var type = $(this).data('type');
-	// enter api key
-	var queryURL = 'http://api.giphy.com/v1/gifs/search?q='+type+'&api_key=8d40e358880641d8b15efdadfafdf16e&limit=10';
-	// make api call
+	var queryURL = 'https://api.giphy.com/v1/gifs/search?q=' + type + '&api_key=dc6zaTOxFJmzC&limit=10';
+	// This is our AJAX request, type of method GET
 	$.ajax({
-		url:queryURL,method:'GET'})
-	.done(function(response){
-		// console.log(response);
+			url: queryURL,
+			method: 'GET'
+		})
+		// After we get a response from the server, we run a function which returns a response
+		.done(function(response) {
 		// exactly like our 6.3 exercise
 		for(var i=0;i<response.data.length; i++){
 			var searchDiv = $('<div class="search-item">');
-			var rating = response.date[i].rating;
+			var rating = response.data[i].rating;
 			var p = $('<p>').text('Rating: '+rating);
 			var animated = response.data[i].images.fixed_height.url;
 			var still = response.data[i].images.fixed_height_still.url;
@@ -46,13 +47,13 @@ $(document).on('click','.searchButton',function(){
 			image.addClass("searchImage");
 			searchDiv.append(p);
 			searchDiv.append(image);
-			$('#searches').append(searchDiv);
+			$('#searches').prepend(searchDiv);
 		}
 	})
 })
 
 $(document).on('click','.searchImage',function(){
-	var state= $(this).attr('data-state');
+	var state= $(this).data('state');
 	if(state =="still"){
 		$(this).attr('scr',$(this).data('animated'));
 		$(this).attr('data-state','animated');
@@ -63,8 +64,9 @@ $(document).on('click','.searchImage',function(){
 })
 
 $('#addSearch').on('click',function(){
-	 var newSearch = $('input').eq(0).val();
-	 searchArray.push(newSearch);
-	 populateButtons(searchArray,'searchButton','#buttonsArea');
-	 return false;
+	var newSearch = $('input').eq(0).val();
+	searchArray.push(newSearch);
+	populateButtons(searchArray,'searchButton','#buttonsArea');
+	// A return false will avoid having to reload the page
+	return false;
 })
