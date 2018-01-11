@@ -17,7 +17,7 @@ Internet is required.
 * [GET method](http://api.jquery.com/get/)
 
 
-# To Do (still needs work)
+# To Do (future work)
 [] popualate with new searches
 
 # Author

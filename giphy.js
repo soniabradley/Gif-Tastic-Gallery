@@ -22,7 +22,7 @@ function populateButtons(searchArray, classToAdd, areaToAddTo) {
 }
 
 $(document).on('click', '.searchButton', function () {
-	// $('#searches').empty();
+	$('#searches').empty();
 	var type = $(this).data('type');
 	var queryURL = 'https://api.giphy.com/v1/gifs/search?q=' + type + '&api_key=dc6zaTOxFJmzC&limit=10';
 	// This is our AJAX request, type of method GET
@@ -52,21 +52,21 @@ $(document).on('click', '.searchButton', function () {
 	})
 })
 
-$(document).on('click','.searchImage',function(){
-	var state= $(this).data('state');
-	if(state =="still"){
-		$(this).attr('scr',$(this).data('animated'));
-		$(this).attr('data-state','animated');
-	} else {
-			$(this).attr('src',$(this).data('still'));
-			$(this).attr('data-state','still');
-	}
-})
+// $(document).on('click','.searchImage',function(){
+// 	var state= $(this).data('state');
+// 	if(state =="still"){
+// 		$(this).attr('scr',$(this).data('animated'));
+// 		$(this).attr('data-state','animated');
+// 	} else {
+// 			$(this).attr('src',$(this).data('still'));
+// 			$(this).attr('data-state','still');
+// 	}
+// })
 
 $('#addSearch').on('click',function(){
-	var newSearch = $('input').eq(0).val();
-	searchArray.push(newSearch);
-	populateButtons(searchArray,'searchButton','#buttonsArea');
-	// A return false will avoid having to reload the page
-	return false;
+	var newSearch = $('search-input').eq(0).val();
+	console.log(newSearch);
+	// searchArray.push(newSearch);
+	// populateButtons(searchArray,'searchButton','#buttonsArea');
+	// return false;
 })
